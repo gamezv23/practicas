@@ -1,0 +1,59 @@
+<div class="padre">
+  <div class="hijo1">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.tarea?.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="title" class="">
+        <th mat-header-cell *matHeaderCellDef>titulo</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="completed">
+        <th mat-header-cell *matHeaderCellDef>status</th>
+        <td mat-cell *matCellDef="let element">
+          <span  ngIf="completed===true"
+            ><mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="home"
+            ></mat-icon
+          ></span>
+          <span  ngIf="completed===false"
+            ><mat-icon
+              aria-hidden="false"
+              aria-label="Example home icon"
+              fontIcon="home"
+            ></mat-icon
+          ></span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="usuario">
+        <th mat-header-cell *matHeaderCellDef>usuario</th>
+        <td mat-cell *matCellDef="let element">
+          <button>detalle usuario</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        (click)="detalle(row.id)"
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+
+      ></tr>
+    </table>
+  </div>
+
+  <div class="hijo2">
+    <app-detalle-usuario
+      [data]="personaseleccionada"
+      (marcarRojo)="incompleto($event)"
+      (marcarVerde)="completo($event)"
+
+    ></app-detalle-usuario>
+  </div>
+</div>
